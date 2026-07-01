@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cappella Embassy | Luxury Embassy Residence, KLCC</title>
+<meta name="description" content="Cappella Embassy — a luxury residence in Kuala Lumpur's Embassy District, minutes from KLCC. A private digital showroom.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0b0b0b;
+    --black-alt:#121210;
+    --black-deep:#060605;
+    --gold:#c9a96e;
+    --gold-light:#e6cd9c;
+    --gold-dim:#8f7648;
+    --ivory:#f4f1ea;
+    --grey:#8d8a82;
+    --line:rgba(201,169,110,0.18);
+    --serif:'Playfair Display', serif;
+    --serif-accent:'Cormorant Garamond', serif;
+    --sans:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--ivory);
+    font-family:var(--sans);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:var(--black);}
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .seal{
+    width:34px;height:34px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    position:relative;
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .seal::before{
+    content:'';
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+  .seal::after{
+    content:'';
+    position:absolute;
+    inset:6px;
+    border:1px solid var(--line);
+    border-radius:50%;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:26px 6vw;
+    transition:background .5s ease, padding .5s ease, backdrop-filter .5s ease;
+  }
+  header.scrolled{
+    background:rgba(11,11,11,0.82);
+    backdrop-filter:blur(14px);
+    padding:16px 6vw;
+    border-bottom:1px solid var(--line);
+  }
+  .brandmark{
+    display:flex;align-items:center;gap:12px;
+    font-family:var(--serif);
+    font-size:15px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+  .brandmark .seal{width:26px;height:26px;}
+  nav.progress-dots{
+    display:flex;gap:9px;
+  }
+  nav.progress-dots span{
+    width:5px;height:5px;border-radius:50%;
+    background:var(--gold-dim);
+    transition:background .4s ease, transform .4s ease;
+  }
+  nav.progress-dots span.active{
+    background:var(--gold);
+    transform:scale(1.6);
+  }
+
+  section{
+    position:relative;
+    padding:150px 6vw;
+  }
+  .section-inner{max-width:1180px;margin:0 auto;}
+
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity 1s cubic-bezier(.16,.84,.44,1), transform 1s cubic-bezier(.16,.84,.44,1);
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-delay-1{transition-delay:.12s;}
+  .reveal-delay-2{transition-delay:.24s;}
+  .reveal-delay-3{transition-delay:.36s;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100svh;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .hero-media{
+    position:absolute;inset:0;
+    z-index:0;
+  }
+  .hero-media img{
+    width:100%;height:100%;object-fit:cover;
+    animation:heroZoom 26s ease-in-out infinite alternate;
+    filter:brightness(0.55) saturate(0.9);
+  }
+  @keyframes heroZoom{
+    0%{transform:scale(1);}
+    100%{transform:scale(1.12);}
+  }
+  .hero::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(6,6,5,0.55) 0%, rgba(6,6,5,0.25) 40%, rgba(6,6,5,0.85) 100%);
+    z-index:1;
+  }
+  .hero-content{
+    position:relative;z-index:2;
+    text-align:center;
+    display:flex;flex-direction:column;
+    align-items:center;
+    padding:0 20px;
+  }
+  .hero-seal{
+    width:64px;height:64px;
+    margin-bottom:28px;
+    animation:fadeIn 1.6s ease .2s both;
+  }
+  .hero-seal .seal{width:64px;height:64px;}
+  .hero-seal .seal::before{width:9px;height:9px;}
+  .hero-seal .seal::after{inset:10px;}
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(44px, 8vw, 108px);
+    letter-spacing:0.06em;
+    line-height:1;
+    color:var(--ivory);
+    animation:fadeIn 1.8s ease .35s both;
+  }
+  .hero .hero-sub{
+    margin-top:22px;
+    font-family:var(--serif-accent);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(16px,2.4vw,22px);
+    color:var(--gold-light);
+    letter-spacing:0.02em;
+    animation:fadeIn 1.8s ease .55s both;
+  }
+  .hero .hero-location{
+    margin-top:14px;
+    font-size:12px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--grey);
+    animation:fadeIn 1.8s ease .7s both;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+  .hero-buttons{
+    margin-top:52px;
+    display:flex;gap:20px;flex-wrap:wrap;
+    justify-content:center;
+    animation:fadeIn 1.8s ease .9s both;
+  }
+  .btn{
+    padding:16px 34px;
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    border:1px solid var(--gold);
+    background:transparent;
+    color:var(--ivory);
+    cursor:pointer;
+    transition:all .45s ease;
+    font-family:var(--sans);
+    font-weight:500;
+  }
+  .btn:hover{
+    background:var(--gold);
+    color:var(--black-deep);
+    letter-spacing:0.3em;
+  }
+  .btn.filled{
+    background:var(--gold);
+    color:var(--black-deep);
+  }
+  .btn.filled:hover{
+    background:var(--gold-light);
+    border-color:var(--gold-light);
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:38px;left:50%;
+    transform:translateX(-50%);
+    z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    animation:fadeIn 1.8s ease 1.2s both;
+  }
+  .scroll-cue .line{
+    width:1px;height:46px;
+    background:linear-gradient(180deg, var(--gold), transparent);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-cue .line::before{
+    content:'';
+    position:absolute;
+    top:-46px;left:0;
+    width:100%;height:46px;
+    background:var(--gold-light);
+    animation:scrollLine 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollLine{
+    0%{top:-46px;}
+    100%{top:46px;}
+  }
+  .scroll-cue span{
+    font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--grey);
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    max-width:640px;
+    margin-bottom:70px;
+  }
+  .section-head .eyebrow{display:block;margin-bottom:18px;}
+  .section-head h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(30px,4.4vw,52px);
+    line-height:1.1;
+    color:var(--ivory);
+  }
+  .section-head p{
+    margin-top:20px;
+    font-family:var(--serif-accent);
+    font-size:19px;
+    color:var(--grey);
+    font-weight:400;
+    line-height:1.6;
+  }
+  .rule{
+    width:56px;height:1px;
+    background:var(--gold);
+    margin-bottom:24px;
+  }
+
+  /* ---------- OVERVIEW CARDS ---------- */
+  .overview{background:var(--black-alt);}
+  .overview-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .ocard{
+    background:var(--black-alt);
+    padding:42px 34px;
+    transition:background .5s ease;
+  }
+  .ocard:hover{background:#171713;}
+  .ocard .icon{
+    width:40px;height:40px;
+    margin-bottom:26px;
+    stroke:var(--gold);
+    fill:none;
+    stroke-width:1.1;
+  }
+  .ocard h3{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--grey);
+    margin-bottom:10px;
+    font-weight:500;
+  }
+  .ocard p{
+    font-family:var(--serif);
+    font-size:21px;
+    color:var(--ivory);
+    font-weight:400;
+    line-height:1.3;
+  }
+
+  /* ---------- SHOWROOM VIDEO ---------- */
+  .showroom{
+    background:var(--black-deep);
+    text-align:center;
+  }
+  .showroom .section-head{margin-left:auto;margin-right:auto;text-align:center;}
+  .video-frame{
+    position:relative;
+    max-width:1040px;
+    margin:0 auto;
+    aspect-ratio:16/9;
+    border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .video-frame::before{
+    content:'';
+    position:absolute;inset:0;
+    border:1px solid transparent;
+    background:linear-gradient(135deg, var(--gold) 0%, transparent 30%, transparent 70%, var(--gold) 100%) border-box;
+    -webkit-mask:linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:0.5;
+    pointer-events:none;
+    z-index:2;
+  }
+  .video-frame iframe,
+  .video-frame video{
+    width:100%;height:100%;
+    border:0;
+    position:relative;z-index:1;
+    background:#000;
+    object-fit:cover;
+  }
+  .showroom-caption{
+    margin-top:30px;
+    font-family:var(--serif-accent);
+    font-style:italic;
+    font-size:18px;
+    color:var(--gold-light);
+  }
+
+  /* ---------- VIDEO GALLERY (unit walkthroughs) ---------- */
+  .video-gallery{
+    max-width:1040px;
+    margin:56px auto 0;
+    text-align:left;
+  }
+  .video-gallery .vg-label{
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--grey);
+    margin-bottom:20px;
+  }
+  .vg-track{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    padding-bottom:12px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .vg-track::-webkit-scrollbar{display:none;}
+  .vg-item{
+    flex:0 0 auto;
+    scroll-snap-align:start;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--grey);
+    padding:14px 20px;
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:0.05em;
+    cursor:pointer;
+    transition:all .35s ease;
+    white-space:nowrap;
+  }
+  .vg-item .vg-size{
+    display:block;
+    font-family:var(--serif-accent);
+    font-style:italic;
+    color:var(--gold-dim);
+    font-size:12px;
+    margin-top:3px;
+  }
+  .vg-item:hover{border-color:var(--gold-dim);color:var(--ivory);}
+  .vg-item.active{
+    border-color:var(--gold);
+    background:rgba(201,169,110,0.08);
+    color:var(--ivory);
+  }
+  .vg-item.active .vg-size{color:var(--gold);}
+
+  /* ---------- WHY SECTION ---------- */
+  .why{background:var(--black);}
+  .why-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .why-item{
+    display:grid;
+    grid-template-columns:90px 1fr 40px;
+    align-items:center;
+    gap:32px;
+    padding:30px 0;
+    border-top:1px solid var(--line);
+    transition:padding-left .5s ease, background .5s ease;
+  }
+  .why-list .why-item:last-child{border-bottom:1px solid var(--line);}
+  .why-item:hover{
+    padding-left:16px;
+    background:linear-gradient(90deg, rgba(201,169,110,0.05), transparent);
+  }
+  .why-item .num{
+    font-family:var(--serif-accent);
+    font-size:15px;
+    color:var(--gold-dim);
+    font-style:italic;
+  }
+  .why-item h3{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(19px,2.4vw,26px);
+    color:var(--ivory);
+  }
+  .why-item .arrow{
+    color:var(--gold);
+    font-size:18px;
+    text-align:right;
+    opacity:0;
+    transform:translateX(-8px);
+    transition:all .4s ease;
+  }
+  .why-item:hover .arrow{opacity:1;transform:translateX(0);}
+
+  /* ---------- UNIT LAYOUT ---------- */
+  .units{background:var(--black-alt);}
+  .unit-track{
+    display:flex;
+    gap:28px;
+    overflow-x:auto;
+    padding-bottom:20px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .unit-track::-webkit-scrollbar{display:none;}
+  .unit-card{
+    flex:0 0 min(360px, 82vw);
+    scroll-snap-align:start;
+    background:var(--black);
+    border:1px solid var(--line);
+  }
+  .unit-plan{
+    aspect-ratio:4/3;
+    background:
+      linear-gradient(135deg, #17160f 0%, #0e0d0a 100%);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .unit-plan svg{width:60%;height:60%;stroke:var(--gold-dim);opacity:0.7;}
+  .unit-plan .tag{
+    position:absolute;top:18px;left:18px;
+    font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--grey);
+    border:1px solid var(--line);
+    padding:5px 10px;
+  }
+  .unit-info{padding:30px 28px 34px;}
+  .unit-info .type{
+    font-family:var(--serif);
+    font-size:26px;
+    color:var(--ivory);
+    margin-bottom:4px;
+  }
+  .unit-info .size{
+    font-family:var(--serif-accent);
+    font-style:italic;
+    color:var(--gold);
+    font-size:16px;
+    margin-bottom:20px;
+  }
+  .unit-specs{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .unit-specs div{
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--grey);
+  }
+  .unit-specs strong{
+    display:block;
+    color:var(--ivory);
+    font-family:var(--serif);
+    font-size:20px;
+    font-weight:400;
+    letter-spacing:0;
+    margin-bottom:4px;
+  }
+  .unit-info .desc{
+    font-size:14px;
+    color:var(--grey);
+    line-height:1.6;
+  }
+  .swipe-hint{
+    display:none;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--grey);
+    margin-top:22px;
+    text-align:center;
+  }
+
+  /* ---------- FACILITIES GALLERY ---------- */
+  .facilities{background:var(--black-deep);}
+  .gallery-track{
+    display:flex;
+    gap:2px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .gallery-track::-webkit-scrollbar{display:none;}
+  .gallery-item{
+    flex:0 0 min(420px,78vw);
+    scroll-snap-align:start;
+    position:relative;
+    aspect-ratio:4/5;
+    overflow:hidden;
+  }
+  .gallery-item img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .8s ease;
+    filter:brightness(0.75);
+  }
+  .gallery-item:hover img{transform:scale(1.06);filter:brightness(0.9);}
+  .gallery-item .label{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:26px 24px;
+    background:linear-gradient(0deg, rgba(6,6,5,0.9), transparent);
+  }
+  .gallery-item .label span{
+    font-family:var(--serif);
+    font-size:20px;
+    color:var(--ivory);
+  }
+
+  /* ---------- LOCATION ---------- */
+  .location{background:var(--black);}
+  .location-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .map-frame{
+    aspect-ratio:1/1;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(201,169,110,0.08), transparent 60%),
+      var(--black-alt);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .map-frame svg{width:100%;height:100%;}
+  .landmark-list{display:flex;flex-direction:column;}
+  .landmark{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    padding:20px 0;
+    border-top:1px solid var(--line);
+  }
+  .landmark:last-child{border-bottom:1px solid var(--line);}
+  .landmark .dist{
+    font-family:var(--serif-accent);
+    font-style:italic;
+    color:var(--gold);
+    font-size:14px;
+    min-width:70px;
+  }
+  .landmark .name{
+    font-family:var(--serif);
+    font-size:19px;
+    color:var(--ivory);
+    font-weight:400;
+  }
+
+  /* ---------- INVESTMENT COMPARISON ---------- */
+  .investment{background:var(--black-alt);text-align:center;}
+  .investment .section-head{margin:0 auto 70px;text-align:center;}
+  .compare-table{
+    max-width:760px;
+    margin:0 auto;
+    border-top:1px solid var(--line);
+  }
+  .compare-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    padding:24px 4px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .compare-row.highlight{
+    background:linear-gradient(90deg, rgba(201,169,110,0.09), transparent);
+  }
+  .compare-row.highlight::before{
+    content:'CAPPELLA EMBASSY';
+    position:absolute;
+    top:-1px;left:0;
+    font-size:9px;
+    letter-spacing:0.2em;
+    color:var(--black-deep);
+    background:var(--gold);
+    padding:4px 10px;
+  }
+  .compare-row .city{
+    text-align:left;
+    font-family:var(--serif);
+    font-size:19px;
+    color:var(--ivory);
+    padding-left:4px;
+  }
+  .compare-row.highlight .city{padding-top:14px;}
+  .compare-row .psf{
+    font-family:var(--serif-accent);
+    font-style:italic;
+    font-size:18px;
+    color:var(--gold-light);
+    padding-right:4px;
+  }
+  .compare-row.highlight .psf{padding-top:14px;color:var(--gold);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--black-deep);
+    padding:110px 6vw 50px;
+    text-align:center;
+    border-top:1px solid var(--line);
+  }
+  footer .seal{width:44px;height:44px;margin:0 auto 26px;}
+  footer .seal::before{width:7px;height:7px;}
+  footer h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(28px,4vw,42px);
+    color:var(--ivory);
+    margin-bottom:34px;
+  }
+  .whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    padding:19px 42px;
+    background:var(--gold);
+    color:var(--black-deep);
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-weight:600;
+    transition:all .4s ease;
+  }
+  .whatsapp-btn:hover{
+    background:var(--gold-light);
+    letter-spacing:0.3em;
+  }
+  .whatsapp-btn svg{width:18px;height:18px;fill:var(--black-deep);}
+  footer .fine{
+    margin-top:70px;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--grey);
+    line-height:1.8;
+  }
+  footer .fine .divider{
+    width:1px;height:1px;
+  }
+
+  @media (max-width:860px){
+    section{padding:100px 6vw;}
+    .overview-grid{grid-template-columns:1fr;}
+    .why-item{grid-template-columns:50px 1fr 24px;gap:18px;}
+    .location-grid{grid-template-columns:1fr;gap:40px;}
+    nav.progress-dots{display:none;}
+    .swipe-hint{display:block;}
+    .compare-row .city{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="brandmark"><span class="seal"></span> Cappella Embassy</div>
+  <nav class="progress-dots" id="dots">
+    <span data-target="hero"></span>
+    <span data-target="overview"></span>
+    <span data-target="showroom"></span>
+    <span data-target="why"></span>
+    <span data-target="units"></span>
+    <span data-target="facilities"></span>
+    <span data-target="location"></span>
+    <span data-target="investment"></span>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=2000&auto=format&fit=crop" alt="Kuala Lumpur skyline at dusk">
+  </div>
+  <div class="hero-content">
+    <div class="hero-seal"><span class="seal"></span></div>
+    <h1>CAPPELLA EMBASSY</h1>
+    <p class="hero-sub">Luxury Living at Kuala Lumpur's Prestigious Embassy District</p>
+    <p class="hero-location">Embassy Row · Jalan Nipah · Kuala Lumpur</p>
+    <div class="hero-buttons">
+      <a href="#showroom" class="btn filled">Watch Showroom Tour</a>
+      <a href="#units" class="btn">View Floor Plan</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Residence</span>
+      <div class="rule"></div>
+      <h2>An Address of Quiet Distinction</h2>
+      <p>Five towers set within Kuala Lumpur's diplomatic quarter, moments from the city's financial heart.</p>
+    </div>
+    <div class="overview-grid">
+      <div class="ocard reveal">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2 3 7v2h18V7z"/><path d="M4 10v9M9 10v9M15 10v9M20 10v9"/><path d="M2 21h20"/></svg>
+        <h3>Location</h3>
+        <p>Embassy Row, Jalan Nipah, Kuala Lumpur</p>
+      </div>
+      <div class="ocard reveal reveal-delay-1">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 21V9l6-5 6 5v12"/><path d="M10 21v-6h4v6"/></svg>
+        <h3>Property Type</h3>
+        <p>Luxury Residence</p>
+      </div>
+      <div class="ocard reveal reveal-delay-2">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 3v18M15 3v18"/></svg>
+        <h3>Tenure</h3>
+        <p>Leasehold</p>
+      </div>
+      <div class="ocard reveal">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+        <h3>Unit Size</h3>
+        <p>1,100 – 2,200 sqft</p>
+      </div>
+      <div class="ocard reveal reveal-delay-1">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Completion Status</h3>
+        <p>Completed</p>
+      </div>
+      <div class="ocard reveal reveal-delay-2">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="5" y="2" width="4" height="20"/><rect x="10" y="6" width="4" height="16"/><rect x="15" y="10" width="4" height="12"/></svg>
+        <h3>Total Towers</h3>
+        <p>5 Towers</p>
+      </div>
+      <div class="ocard reveal">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="1"/><path d="M11 6h2M11 10h2M11 14h2"/></svg>
+        <h3>Private Lift Lobby</h3>
+        <p>Direct residence access</p>
+      </div>
+      <div class="ocard reveal reveal-delay-1">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-7h6v7"/></svg>
+        <h3>Premium Interior</h3>
+        <p>Finest finishing throughout</p>
+      </div>
+      <div class="ocard reveal reveal-delay-2">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <h3>Proximity</h3>
+        <p>Near KLCC</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWROOM VIDEO -->
+<section class="showroom" id="showroom">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Private Showing</span>
+      <div class="rule" style="margin-left:auto;margin-right:auto;"></div>
+      <h2>Experience the Residence</h2>
+    </div>
+    <div class="video-frame reveal">
+      <video id="showroomVideo" controls preload="metadata" playsinline>
+        <source src="./D_Rapport Video/27 floor 2238sqft show unit.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="showroom-caption reveal">A private showroom walkthrough experience.</p>
+
+    <div class="video-gallery reveal">
+      <div class="vg-label">Select a Residence Walkthrough</div>
+      <div class="vg-track" id="vgTrack">
+        <div class="vg-item active" data-src="./D_Rapport Video/27 floor 2238sqft show unit.mp4">Level 27 Show Unit<span class="vg-size">2,238 sqft</span></div>
+        <div class="vg-item" data-src="./D_Rapport Video/27 floor 1613 sqft show unit.mp4">Level 27 Show Unit<span class="vg-size">1,613 sqft</span></div>
+        <div class="vg-item" data-src="./D_Rapport Video/2238 SQFT A1-05户型.mp4">Type A1-05<span class="vg-size">2,238 sqft</span></div>
+        <div class="vg-item" data-src="./D_Rapport Video/2238 sqft -A1-03户型.mp4">Type A1-03<span class="vg-size">2,238 sqft</span></div>
+        <div class="vg-item" data-src="./D_Rapport Video/2238 SQFT A2-06户型.mp4">Type A2-06<span class="vg-size">2,238 sqft</span></div>
+        <div class="vg-item" data-src="./D_Rapport Video/1613 SQFT C-01户型.mp4">Type C-01<span class="vg-size">1,613 sqft</span></div>
+        <div class="vg-item" data-src="./D_Rapport Video/1613 SQFT C-3A户型.mp4">Type C-3A<span class="vg-size">1,613 sqft</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Distinction</span>
+      <div class="rule"></div>
+      <h2>Why Cappella Embassy</h2>
+    </div>
+    <div class="why-list">
+      <div class="why-item reveal"><span class="num">01</span><h3>Prestigious Embassy Address</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">02</span><h3>Minutes to KLCC</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">03</span><h3>Surrounded by International Embassies</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">04</span><h3>Walking Distance to International Hospital</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">05</span><h3>High Rental Demand from Expats</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">06</span><h3>Spacious Luxury Layout</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">07</span><h3>Premium Security</h3><span class="arrow">&#8594;</span></div>
+      <div class="why-item reveal"><span class="num">08</span><h3>Suitable for Investment and Own Stay</h3><span class="arrow">&#8594;</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- UNITS -->
+<section class="units" id="units">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Residences</span>
+      <div class="rule"></div>
+      <h2>Unit Layout</h2>
+      <p>Three configurations, each composed for space, light, and privacy.</p>
+    </div>
+    <div class="unit-track reveal">
+      <div class="unit-card">
+        <div class="unit-plan">
+          <span class="tag">Floor Plan</span>
+          <svg viewBox="0 0 100 80"><rect x="8" y="8" width="84" height="64" fill="none" stroke-width="1.5"/><line x1="50" y1="8" x2="50" y2="45" stroke-width="1"/><line x1="8" y1="45" x2="92" y2="45" stroke-width="1"/></svg>
+        </div>
+        <div class="unit-info">
+          <div class="type">Type A</div>
+          <div class="size">1,108 sqft</div>
+          <div class="unit-specs">
+            <div><strong>2</strong>Bedroom</div>
+            <div><strong>2</strong>Bathroom</div>
+            <div><strong>1</strong>Balcony</div>
+          </div>
+          <p class="desc">An intimate footprint with an open living plan and a private balcony framing the skyline.</p>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="unit-plan">
+          <span class="tag">Floor Plan</span>
+          <svg viewBox="0 0 100 80"><rect x="8" y="8" width="84" height="64" fill="none" stroke-width="1.5"/><line x1="60" y1="8" x2="60" y2="50" stroke-width="1"/><line x1="8" y1="50" x2="92" y2="50" stroke-width="1"/><line x1="8" y1="8" x2="8" y2="50" stroke-width="1"/></svg>
+        </div>
+        <div class="unit-info">
+          <div class="type">Type B</div>
+          <div class="size">1,613 sqft</div>
+          <div class="unit-specs">
+            <div><strong>3</strong>Bedroom</div>
+            <div><strong>3</strong>Bathroom</div>
+            <div><strong>1</strong>Balcony</div>
+          </div>
+          <p class="desc">A generous family residence with a separated wing for privacy and a wraparound balcony.</p>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="unit-plan">
+          <span class="tag">Floor Plan</span>
+          <svg viewBox="0 0 100 80"><rect x="8" y="8" width="84" height="64" fill="none" stroke-width="1.5"/><line x1="45" y1="8" x2="45" y2="72" stroke-width="1"/><line x1="45" y1="35" x2="92" y2="35" stroke-width="1"/><line x1="8" y1="50" x2="45" y2="50" stroke-width="1"/></svg>
+        </div>
+        <div class="unit-info">
+          <div class="type">Type C</div>
+          <div class="size">2,238 sqft</div>
+          <div class="unit-specs">
+            <div><strong>4</strong>Bedroom</div>
+            <div><strong>4</strong>Bathroom</div>
+            <div><strong>2</strong>Balcony</div>
+          </div>
+          <p class="desc">The signature residence — dual balconies, a formal dining hall, and panoramic corner views.</p>
+        </div>
+      </div>
+    </div>
+    <p class="swipe-hint">&#8592; Swipe to browse &#8594;</p>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="facilities" id="facilities">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Amenities</span>
+      <div class="rule"></div>
+      <h2>Facilities Gallery</h2>
+    </div>
+  </div>
+  <div class="gallery-track reveal">
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Swimming Pool.jpg" alt="Swimming pool"><div class="label"><span>Swimming Pool</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/GOLF.jpg" alt="Golf"><div class="label"><span>Golf</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Gymnasium.jpg" alt="Gymnasium"><div class="label"><span>Gymnasium</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Karaoke Room.jpg" alt="Karaoke room"><div class="label"><span>Karaoke Room</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Walking Deck.jpg" alt="Walking deck"><div class="label"><span>Walking Deck</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Basketball Court.png" alt="Basketball court"><div class="label"><span>Basketball Court</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Tennis Court.png" alt="Tennis court"><div class="label"><span>Tennis Court</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Squash Court.jpg" alt="Squash court"><div class="label"><span>Squash Court</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Game Room.jpg" alt="Game room"><div class="label"><span>Game Room</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Indoor Room.jpg" alt="Indoor room"><div class="label"><span>Indoor Room</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Playground.png" alt="Playground"><div class="label"><span>Playground</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Park.png" alt="Park"><div class="label"><span>Park</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Maze.jpg" alt="Maze"><div class="label"><span>Maze</span></div></div>
+    <div class="gallery-item"><img src="./D_Rapport Facilities photos/Field.jpg" alt="Field"><div class="label"><span>Field</span></div></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Situated Within</span>
+      <div class="rule"></div>
+      <h2>The Embassy District</h2>
+    </div>
+    <div class="location-grid">
+      <div class="map-frame reveal">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0H0V40" fill="none" stroke="rgba(201,169,110,0.12)" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="400" height="400" fill="url(#grid)"/>
+          <path d="M40 320 L120 260 L160 300 L220 180 L280 220 L360 90" stroke="rgba(201,169,110,0.3)" stroke-width="1" fill="none"/>
+          <path d="M0 200 L400 170" stroke="rgba(201,169,110,0.2)" stroke-width="1" fill="none"/>
+          <circle cx="200" cy="200" r="7" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+          <circle cx="200" cy="200" r="3" fill="#c9a96e"/>
+          <circle cx="280" cy="220" r="3" fill="rgba(201,169,110,0.5)"/>
+          <circle cx="120" cy="260" r="3" fill="rgba(201,169,110,0.5)"/>
+          <circle cx="220" cy="180" r="3" fill="rgba(201,169,110,0.5)"/>
+          <circle cx="360" cy="90" r="3" fill="rgba(201,169,110,0.5)"/>
+        </svg>
+      </div>
+      <div class="landmark-list reveal">
+        <div class="landmark"><span class="dist">0.9 KM</span><span class="name">KLCC</span></div>
+        <div class="landmark"><span class="dist">1.2 KM</span><span class="name">Gleneagles Hospital Kuala Lumpur</span></div>
+        <div class="landmark"><span class="dist">Adjacent</span><span class="name">Embassy District</span></div>
+        <div class="landmark"><span class="dist">2.1 KM</span><span class="name">Pavilion Kuala Lumpur</span></div>
+        <div class="landmark"><span class="dist">1.8 KM</span><span class="name">International Schools</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section class="investment" id="investment">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Global Value</span>
+      <div class="rule" style="margin-left:auto;margin-right:auto;"></div>
+      <h2>Prestigious Global Address at Attractive Entry Price</h2>
+    </div>
+    <div class="compare-table reveal">
+      <div class="compare-row highlight"><span class="city">KL Embassy District</span><span class="psf">RM900+ psf</span></div>
+      <div class="compare-row"><span class="city">Singapore Luxury</span><span class="psf">RM4,500+ psf</span></div>
+      <div class="compare-row"><span class="city">Hong Kong Luxury</span><span class="psf">RM6,000+ psf</span></div>
+      <div class="compare-row"><span class="city">London Prime Area</span><span class="psf">RM5,000+ psf</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="seal"></span>
+  <h2>Arrange Your Private Viewing</h2>
+  <a class="whatsapp-btn" href="https://wa.me/60000000000?text=I%20would%20like%20to%20arrange%20a%20private%20viewing%20of%20Cappella%20Embassy" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.6 6.3A8.5 8.5 0 0 0 3.7 16.4L2.5 21l4.7-1.2A8.5 8.5 0 0 0 17.6 6.3zM12 19a7 7 0 0 1-3.6-1l-.3-.1-2.7.7.7-2.6-.2-.3A7 7 0 1 1 12 19zm3.9-5.2c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1s-.6.7-.8.9-.3.2-.5.1a5.6 5.6 0 0 1-2.8-2.4c-.2-.3.2-.3.6-1 .1-.1.1-.3 0-.4l-.6-1.5c-.2-.4-.3-.4-.5-.4h-.4a.9.9 0 0 0-.6.3 2.6 2.6 0 0 0-.8 1.9 4.5 4.5 0 0 0 1 2.4 10.3 10.3 0 0 0 4 3.5c1.5.6 1.8.5 2.2.5a1.9 1.9 0 0 0 1.3-.9 1.5 1.5 0 0 0 .1-.9c-.1-.1-.2-.2-.4-.3z"/></svg>
+    Arrange Private Viewing
+  </a>
+  <div class="fine">Cappella Embassy · Embassy Row, Jalan Nipah, Kuala Lumpur<br>All information is subject to change and does not constitute an offer.</div>
+</footer>
+
+<script>
+  // showroom video gallery — swap clip on click
+  const showroomVideo = document.getElementById('showroomVideo');
+  const vgItems = document.querySelectorAll('.vg-item');
+  vgItems.forEach(item => {
+    item.addEventListener('click', () => {
+      vgItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      const src = item.dataset.src;
+      showroomVideo.querySelector('source').src = src;
+      showroomVideo.load();
+      showroomVideo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  // header background on scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // progress dots
+  const dots = document.querySelectorAll('#dots span');
+  const sections = Array.from(dots).map(d => document.getElementById(d.dataset.target));
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = sections.indexOf(entry.target);
+      if (entry.isIntersecting && idx !== -1) {
+        dots.forEach(d => d.classList.remove('active'));
+        dots[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => s && dotObserver.observe(s));
+
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      document.getElementById(d.dataset.target).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.hero-media img').forEach(img => img.style.animation = 'none');
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
