@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cappella Embassy Residences — Private Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          serif: ['"Cormorant Garamond"', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root{
+    --ivory:#FAF8F4;
+    --stone:#F2EEE6;
+    --champagne:#E4D3AE;
+    --gold:#B08D57;
+    --gold-deep:#8A6A3D;
+    --charcoal:#2A2621;
+    --ink-soft:#5C554A;
+    --line:#E5DFD2;
+    --available:#8FAE8B;
+    --available-bg:#EDF3EC;
+    --strategic:#D9A857;
+    --strategic-bg:#FBF1DF;
+    --sold:#C98E8E;
+    --sold-bg:#F7EBEB;
+    --disabled:#B9B4AA;
+    --disabled-bg:#EFEDE8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--ivory);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(176,141,87,0.09) 1px, transparent 0);
+    background-size:28px 28px;
+    color:var(--charcoal);
+    -webkit-font-smoothing:antialiased;
+  }
+  .font-display{font-family:'Playfair Display', serif;}
+  .font-serif-soft{font-family:'Cormorant Garamond', serif;}
+  ::selection{background:var(--champagne); color:var(--charcoal);}
+
+  /* Glassmorphism */
+  .glass{
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.6);
+  }
+  .glass-card{
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.7);
+    box-shadow:0 8px 30px rgba(138,106,61,0.08);
+    transition:all .35s cubic-bezier(.22,1,.36,1);
+  }
+  .glass-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 40px rgba(138,106,61,0.15);
+    border-color:var(--champagne);
+  }
+
+  .gold-line{
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    height:1px;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg, var(--gold), var(--gold-deep));
+    color:#fff;
+    letter-spacing:.04em;
+    transition:all .3s ease;
+    box-shadow:0 8px 24px rgba(138,106,61,0.25);
+  }
+  .btn-gold:hover{
+    box-shadow:0 12px 32px rgba(138,106,61,0.4);
+    transform:translateY(-2px);
+  }
+  .btn-outline{
+    border:1px solid var(--gold);
+    color:var(--gold-deep);
+    background:transparent;
+    transition:all .3s ease;
+  }
+  .btn-outline:hover{
+    background:var(--gold);
+    color:#fff;
+  }
+
+  .fade-section{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .fade-section.in-view{opacity:1; transform:translateY(0);}
+
+  /* Unit status swatches */
+  .unit-tile{
+    cursor:pointer;
+    transition:all .25s cubic-bezier(.22,1,.36,1);
+    border:1px solid transparent;
+  }
+  .unit-tile:hover{transform:scale(1.06); box-shadow:0 10px 24px rgba(0,0,0,0.12); z-index:5;}
+  .status-available{background:var(--available-bg); border-color:var(--available); color:#3E5A3C;}
+  .status-strategic{background:var(--strategic-bg); border-color:var(--strategic); color:#8A6415;}
+  .status-sold{background:var(--sold-bg); border-color:var(--sold); color:#8A4A4A; cursor:not-allowed; opacity:.75;}
+  .status-disabled{background:var(--disabled-bg); border-color:var(--disabled); color:#8f8b82; cursor:not-allowed; opacity:.55;}
+
+  .tab-btn{
+    transition:all .3s ease;
+    border-bottom:2px solid transparent;
+  }
+  .tab-btn.active{
+    color:var(--gold-deep);
+    border-bottom:2px solid var(--gold);
+  }
+
+  .modal-backdrop{
+    background:rgba(42,38,33,0.45);
+    backdrop-filter:blur(6px);
+  }
+
+  ::-webkit-scrollbar{width:8px; height:8px;}
+  ::-webkit-scrollbar-track{background:var(--stone);}
+  ::-webkit-scrollbar-thumb{background:var(--champagne); border-radius:8px;}
+
+  .floor-row:nth-child(even){background:rgba(228,211,174,0.08);}
+
+  .whatsapp-float{
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    animation:pulseFloat 3s ease-in-out infinite;
+  }
+  @keyframes pulseFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-6px);}
+  }
+
+  .hero-bg{
+    background:
+      linear-gradient(180deg, rgba(42,38,33,0.35) 0%, rgba(42,38,33,0.55) 55%, rgba(42,38,33,0.85) 100%),
+      url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2000&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+  }
+
+  input[type=range]{-webkit-appearance:none; height:3px; background:var(--line); border-radius:4px;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:var(--gold); cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.2);}
+
+  .heart-btn svg{transition:all .25s ease;}
+  .heart-btn.active svg{fill:#C4838A; stroke:#C4838A; transform:scale(1.15);}
+
+  .compare-slot{border:1.5px dashed var(--line); transition:all .25s ease;}
+
+  .badge{font-size:11px; letter-spacing:.08em; text-transform:uppercase;}
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- ============ NAV ============ -->
+<nav id="mainNav" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500" style="background:transparent;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between py-5">
+    <div class="font-display text-xl tracking-wide" id="navLogo" style="color:#fff;">Cappella <span style="color:var(--champagne);">Embassy</span></div>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium" id="navLinks" style="color:#fff;">
+      <a href="#overview" class="hover:opacity-70">Overview</a>
+      <a href="#blocks" class="hover:opacity-70">Residences</a>
+      <a href="#gallery" class="hover:opacity-70">Showroom</a>
+      <button onclick="openFavoritesPanel()" class="flex items-center gap-1.5 hover:opacity-70">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        Saved <span id="favCountNav">(0)</span>
+      </button>
+    </div>
+    <a href="#blocks" class="btn-gold px-5 py-2.5 rounded-full text-sm font-medium">View Available Units</a>
+  </div>
+</nav>
+
+<!-- ============ SECTION 1: HERO ============ -->
+<header class="hero-bg h-screen w-full flex items-center justify-center relative">
+  <div class="text-center px-6 max-w-3xl">
+    <p class="font-serif-soft italic text-lg mb-4 tracking-wide" style="color:var(--champagne);">Kuala Lumpur Embassy District</p>
+    <h1 class="font-display text-white text-5xl md:text-7xl leading-tight mb-6">Cappella Embassy<br/>Private Collection</h1>
+    <p class="text-white/85 text-lg font-light mb-2 max-w-xl mx-auto">Explore premium residences located in Kuala Lumpur's Embassy District.</p>
+    <p class="text-white/60 text-sm mb-10 tracking-wide">Updated latest available inventory</p>
+    <a href="#blocks" class="btn-gold inline-block px-10 py-4 rounded-full text-sm tracking-wide font-medium">View Available Units</a>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-xs tracking-[0.3em] uppercase">Scroll</div>
+</header>
+
+<!-- ============ SECTION 2: OVERVIEW ============ -->
+<section id="overview" class="fade-section py-24 px-6 lg:px-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="badge font-medium" style="color:var(--gold-deep);">Project Overview</p>
+      <h2 class="font-display text-3xl md:text-4xl mt-3">A Private Address in the Heart of the City</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="glass-card rounded-2xl p-7">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center mb-4" style="background:var(--stone);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-deep)" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <p class="text-xs uppercase tracking-widest text-[--ink-soft] mb-1" style="color:var(--ink-soft);">Location</p>
+        <p class="font-serif-soft text-lg">Embassy District, Kuala Lumpur</p>
+      </div>
+      <div class="glass-card rounded-2xl p-7">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center mb-4" style="background:var(--stone);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-deep)" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <p class="text-xs uppercase tracking-widest mb-1" style="color:var(--ink-soft);">Tenure</p>
+        <p class="font-serif-soft text-lg">Freehold Residence</p>
+      </div>
+      <div class="glass-card rounded-2xl p-7">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center mb-4" style="background:var(--stone);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-deep)" stroke-width="1.8"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        </div>
+        <p class="text-xs uppercase tracking-widest mb-1" style="color:var(--ink-soft);">Positioning</p>
+        <p class="font-serif-soft text-lg">Premium Diplomatic Enclave Residence</p>
+      </div>
+      <div class="glass-card rounded-2xl p-7">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center mb-4" style="background:var(--stone);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-deep)" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </div>
+        <p class="text-xs uppercase tracking-widest mb-1" style="color:var(--ink-soft);">Developer</p>
+        <p class="font-serif-soft text-lg">Residensi Cappella Embassy</p>
+      </div>
+    </div>
+    <p class="text-center text-xs mt-8 tracking-wide" style="color:var(--ink-soft);">Private inventory updated daily</p>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto gold-line"></div>
+
+<!-- ============ SECTION 3: BLOCK SELECTOR ============ -->
+<section id="blocks" class="fade-section py-24 px-6 lg:px-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="badge font-medium" style="color:var(--gold-deep);">Residences</p>
+      <h2 class="font-display text-3xl md:text-4xl mt-3">Select Your Block</h2>
+      <p class="text-sm mt-3" style="color:var(--ink-soft);">Five private residence blocks, each with its own character and view corridor.</p>
+    </div>
+    <div id="blockGrid" class="grid grid-cols-2 md:grid-cols-5 gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ BLOCK / INVENTORY VIEW ============ -->
+<section id="inventoryView" class="hidden py-16 px-4 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+
+    <button onclick="closeInventory()" class="btn-outline rounded-full px-5 py-2 text-sm mb-8 inline-flex items-center gap-2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to Blocks
+    </button>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+
+      <!-- LEFT: main inventory -->
+      <div class="flex-1 min-w-0">
+        <h2 class="font-display text-3xl mb-1">Block <span id="activeBlockName"></span></h2>
+        <p class="text-sm mb-6" style="color:var(--ink-soft);">Select your new home — click any available unit for full details</p>
+
+        <!-- Unit type tabs -->
+        <div id="typeTabs" class="flex flex-wrap gap-2 mb-6 border-b pb-4" style="border-color:var(--line);"></div>
+
+        <!-- Smart filter bar -->
+        <div class="glass-card rounded-2xl p-5 mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label class="text-xs uppercase tracking-widest" style="color:var(--ink-soft);">Search Unit No.</label>
+            <input id="searchUnit" type="text" placeholder="e.g. A-37-02" class="w-full mt-1 bg-transparent border-b py-1.5 text-sm outline-none" style="border-color:var(--line);">
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest" style="color:var(--ink-soft);">Floor Level</label>
+            <select id="filterFloorLevel" class="w-full mt-1 bg-transparent border-b py-1.5 text-sm outline-none" style="border-color:var(--line);">
+              <option value="all">All Floors</option>
+              <option value="low">Low Floor</option>
+              <option value="mid">Mid Floor</option>
+              <option value="high">High Floor</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest" style="color:var(--ink-soft);">Price Range</label>
+            <select id="filterPrice" class="w-full mt-1 bg-transparent border-b py-1.5 text-sm outline-none" style="border-color:var(--line);">
+              <option value="all">Any Price</option>
+              <option value="0-1000000">RM500k – RM1M</option>
+              <option value="1000000-2000000">RM1M – RM2M</option>
+              <option value="2000000-999999999">RM2M Above</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest" style="color:var(--ink-soft);">Status</label>
+            <select id="filterStatus" class="w-full mt-1 bg-transparent border-b py-1.5 text-sm outline-none" style="border-color:var(--line);">
+              <option value="all">All Status</option>
+              <option value="available">Available</option>
+              <option value="strategic">Available Strategic</option>
+              <option value="sold">Sold</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex flex-wrap gap-5 mb-6 text-xs">
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:var(--available);"></span>Available</div>
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:var(--strategic);"></span>Available Strategic</div>
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:var(--sold);"></span>Sold</div>
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:var(--disabled);"></span>Unavailable</div>
+        </div>
+
+        <!-- Floor inventory -->
+        <div id="floorInventory" class="glass-card rounded-2xl overflow-hidden"></div>
+      </div>
+
+      <!-- RIGHT: live status + favorites + compare -->
+      <div class="w-full lg:w-80 flex-shrink-0 space-y-6">
+        <div class="glass-card rounded-2xl p-6">
+          <p class="badge font-medium mb-3" style="color:var(--gold-deep);">Live Inventory Status</p>
+          <ul class="text-sm space-y-3" style="color:var(--ink-soft);">
+            <li class="flex gap-2"><span style="color:var(--gold);">—</span> Preferred high floor units selected frequently</li>
+            <li class="flex gap-2"><span style="color:var(--gold);">—</span> Limited premium layouts remaining</li>
+            <li class="flex gap-2"><span style="color:var(--gold);">—</span> Popular unit types moving fast</li>
+          </ul>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-3">
+            <p class="badge font-medium" style="color:var(--gold-deep);">Saved Units</p>
+            <span id="favCount" class="text-xs" style="color:var(--ink-soft);">0 saved</span>
+          </div>
+          <div id="favoritesList" class="space-y-2 text-sm"></div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <p class="badge font-medium mb-3" style="color:var(--gold-deep);">Compare Units</p>
+          <p class="text-xs mb-3" style="color:var(--ink-soft);">Select up to 3 units to compare side by side</p>
+          <div id="compareSlots" class="grid grid-cols-3 gap-2 mb-3"></div>
+          <button onclick="openCompare()" class="btn-gold w-full rounded-full py-2.5 text-xs">Compare Selected</button>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <p class="badge font-medium mb-3" style="color:var(--gold-deep);">Documents</p>
+          <div class="space-y-2 text-sm">
+            <button class="w-full text-left btn-outline rounded-lg px-4 py-2.5 flex items-center justify-between" onclick="mockDownload('Floor Plan PDF')">Floor Plan PDF <span>↓</span></button>
+            <button class="w-full text-left btn-outline rounded-lg px-4 py-2.5 flex items-center justify-between" onclick="mockDownload('Sales Package PDF')">Sales Package PDF <span>↓</span></button>
+            <button class="w-full text-left btn-outline rounded-lg px-4 py-2.5 flex items-center justify-between" onclick="mockDownload('Project Brochure PDF')">Project Brochure PDF <span>↓</span></button>
+            <button class="w-full text-left btn-outline rounded-lg px-4 py-2.5 flex items-center justify-between" onclick="mockDownload('Location Map PDF')">Location Map PDF <span>↓</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 12: SHOWROOM VIDEO ============ -->
+<section id="gallery" class="fade-section py-24 px-6 lg:px-10" style="background:var(--stone);">
+  <div class="max-w-5xl mx-auto text-center">
+    <p class="badge font-medium" style="color:var(--gold-deep);">Showroom</p>
+    <h2 class="font-display text-3xl md:text-4xl mt-3 mb-10">360° Showroom Walkthrough</h2>
+    <div class="rounded-2xl overflow-hidden shadow-2xl relative" style="aspect-ratio:16/9;">
+      <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      </video>
+      <div class="absolute inset-0 flex items-center justify-center" style="background:rgba(42,38,33,0.15);">
+        <span class="text-white/80 text-sm tracking-widest uppercase">Sample Showreel — replace with project walkthrough</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER / CTA ============ -->
+<footer class="py-16 px-6 lg:px-10" style="background:var(--charcoal); color:#EDE7DA;">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <div>
+      <p class="font-display text-xl">Cappella <span style="color:var(--champagne);">Embassy</span></p>
+      <p class="text-xs mt-1 opacity-60">Private Inventory Portal · Embassy District, Kuala Lumpur</p>
+    </div>
+    <a href="#blocks" class="btn-gold px-8 py-3 rounded-full text-sm">Request Private Inventory Access</a>
+  </div>
+</footer>
+
+<!-- WhatsApp floating CTA -->
+<a href="https://wa.me/60000000000?text=I%20would%20like%20to%20request%20private%20inventory%20access%20for%20Cappella%20Embassy" target="_blank"
+   class="whatsapp-float fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full pl-4 pr-5 py-3 text-white text-sm"
+   style="background:#25D366;">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.05-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.42-4.4-1.16l-.32-.18-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+  Request Private Inventory Access
+</a>
+
+<!-- ============ UNIT DETAIL MODAL ============ -->
+<div id="unitModal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+  <div class="glass rounded-3xl max-w-md w-full p-8 relative" style="background:#FDFCFA;">
+    <button onclick="closeModal()" class="absolute top-5 right-5 opacity-50 hover:opacity-100">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <p class="badge" style="color:var(--gold-deep);">Unit Details</p>
+    <h3 id="modalUnitNo" class="font-display text-3xl mt-1 mb-5"></h3>
+    <div class="grid grid-cols-2 gap-y-4 text-sm mb-6">
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Tower</p><p id="modalTower" class="font-serif-soft text-lg"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Floor</p><p id="modalFloor" class="font-serif-soft text-lg"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Built-up</p><p id="modalSize" class="font-serif-soft text-lg"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Price</p><p id="modalPrice" class="font-serif-soft text-lg" style="color:var(--gold-deep);"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Bedrooms</p><p id="modalBed" class="font-serif-soft text-lg"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Bathrooms</p><p id="modalBath" class="font-serif-soft text-lg"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Facing</p><p id="modalFacing" class="font-serif-soft text-lg"></p></div>
+      <div><p class="text-xs uppercase tracking-wide" style="color:var(--ink-soft);">Status</p><p id="modalStatus" class="font-serif-soft text-lg"></p></div>
+    </div>
+    <div class="flex flex-col gap-2.5">
+      <button onclick="mockDownload('Floor Plan')" class="btn-outline rounded-full py-3 text-sm">Download Floor Plan</button>
+      <button id="modalRequestPrice" class="btn-outline rounded-full py-3 text-sm">Request Full Price</button>
+      <button id="modalSchedule" class="btn-gold rounded-full py-3 text-sm">Schedule Viewing</button>
+      <button id="modalFavBtn" onclick="toggleFavoriteFromModal()" class="heart-btn flex items-center justify-center gap-2 text-sm py-2 opacity-70 hover:opacity-100">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        Save to Favorites
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ COMPARE MODAL ============ -->
+<div id="compareModal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+  <div class="glass rounded-3xl max-w-3xl w-full p-8 relative overflow-x-auto" style="background:#FDFCFA;">
+    <button onclick="closeCompare()" class="absolute top-5 right-5 opacity-50 hover:opacity-100">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 class="font-display text-2xl mb-6">Compare Units</h3>
+    <table class="w-full text-sm min-w-[500px]">
+      <tbody id="compareTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+/* ================= INVENTORY DATA =================
+   Transcribed from the Residensi Cappella Embassy price chart.
+   Source scan has several low-legibility cells on mid-floors —
+   fields below are the clearly legible unit no. + price + status
+   per block. bedroom/bathroom/size/facing are typical estimates by
+   unit type (not printed on the source chart) and should be
+   replaced with real specs when available.
+   status: "available" | "strategic" | "sold" | "disabled"
+==================================================== */
+const TYPE_SPECS = {
+  'Penthouse': {size:2800, bed:4, bath:5, facing:'Panoramic City & KLCC View'},
+  'A':  {size:1180, bed:3, bath:2, facing:'KLCC View'},
+  'A1': {size:990,  bed:2, bath:2, facing:'City View'},
+  'A2': {size:1050, bed:3, bath:2, facing:'Pool View'},
+  'B':  {size:850,  bed:2, bath:2, facing:'City View'},
+  'B-T':{size:900,  bed:2, bath:2, facing:'Pool View'},
+  'C':  {size:750,  bed:2, bath:1, facing:'City View'},
+  'D':  {size:680,  bed:1, bath:1, facing:'Pool View'},
+  'D1': {size:640,  bed:1, bath:1, facing:'City View'},
+  'D2': {size:660,  bed:1, bath:1, facing:'City View'},
+  'D3': {size:700,  bed:2, bath:1, facing:'Pool View'},
+  '2U': {size:1300, bed:3, bath:2, facing:'KLCC View'},
+  '2-2':{size:1250, bed:3, bath:2, facing:'City View'},
+  '2-3':{size:1200, bed:3, bath:2, facing:'City View'},
+  '2-4':{size:1150, bed:2, bath:2, facing:'Pool View'},
+  '2U-1':{size:1300, bed:3, bath:2, facing:'KLCC View'},
+  '2-2C':{size:1250, bed:3, bath:2, facing:'City View'},
+};
+function specFor(type){ return TYPE_SPECS[type] || {size:800, bed:2, bath:2, facing:'City View'}; }
+
+function u(unitNo, block, floor, type, price, status){
+  const s = specFor(type);
+  return { unitNo, block, floor, type, price, status, ...s };
+}
+
+const INVENTORY = [
+  // ---------------- BLOCK A ----------------
+  u('A-PH-01','A','38','Penthouse',2770000,'available'),
+  u('A-PH-02','A','38','Penthouse',2770000,'strategic'),
+  u('A-37-02','A','37','B',1800000,'strategic'),
+  u('A-37-03','A','37','B',1800000,'available'),
+  u('A-37-05','A','37','B',1808000,'available'),
+  u('A-37-3A','A','37','C',1524000,'strategic'),
+  u('A-36-02','A','36','B',1799000,'strategic'),
+  u('A-36-03','A','36','B',1799000,'available'),
+  u('A-36-2A','A','36','C',1523000,'strategic'),
+  u('A-33A-03','A','33A','B',1797000,'strategic'),
+  u('A-33A-06','A','33A','B',1797000,'strategic'),
+  u('A-33A-3A','A','33A','C',1571000,'available'),
+  u('A-32-03','A','32','B',1793000,'strategic'),
+  u('A-32-06','A','32','B',1793000,'strategic'),
+  u('A-32-3A','A','32','C',1519000,'available'),
+  u('A-30-03','A','30','B',1793000,'available'),
+  u('A-30-3A','A','30','C',1517000,'available'),
+  u('A-29-01','A','29','C',1516200,'strategic'),
+  u('A-29-02','A','29','B',1792000,'strategic'),
+  u('A-28-03','A','28','B',1791000,'available'),
+  u('A-29-06','A','28','B',1791000,'available'),
+  u('A-28-01','A','28','C',1520000,'sold'),
+  u('A-28-3A','A','28','C',1515000,'available'),
+  u('A-27-03','A','27','B',1798000,'available'),
+  u('A-27-06','A','27','B',1798000,'available'),
+  u('A-27-01','A','27','C',1519000,'sold'),
+  u('A-25-02','A','25','B',1788000,'available'),
+  u('A-25-05','A','25','B',1783000,'available'),
+  u('A-25-06','A','25','B',1783000,'available'),
+  u('A-25-01','A','25','C',1517000,'available'),
+  u('A-23A-05','A','23A','B',1792000,'available'),
+  u('A-23A-06','A','23A','B',1787000,'available'),
+  u('A-23-02','A','23','B',1785000,'strategic'),
+  u('A-23-05','A','23','C',1781000,'strategic'),
+  u('A-23-01','A','23','C',1515000,'available'),
+  u('A-22-05','A','22','B',1785000,'available'),
+  u('A-22-06','A','22','B',1785000,'available'),
+  u('A-22-01','A','22','C',1514000,'available'),
+  u('A-21-03','A','21','B',1784000,'available'),
+  u('A-21-05','A','21','B',1770000,'available'),
+  u('A-21-01','A','21','C',1512000,'available'),
+  u('A-21-3A','A','21','C',1500000,'available'),
+  u('A-20-06','A','20','B',1783000,'available'),
+  u('A-20-3A','A','20','C',1507000,'available'),
+  u('A-19-05','A','19','B',1777000,'available'),
+  u('A-19-06','A','19','B',1777000,'available'),
+  u('A-17-03','A','17','B',1780000,'available'),
+  u('A-17-3A','A','17','C',1504000,'available'),
+  u('A-16-03','A','16','B',1779000,'available'),
+  u('A-16-3A','A','16','C',1503000,'available'),
+  u('A-15-03','A','15','B',1778000,'available'),
+  u('A-15-06','A','15','B',1778000,'available'),
+  u('A-15-3A','A','15','C',1502000,'available'),
+  u('A-13A-3A','A','13A','C',1501000,'available'),
+  u('A-13-06','A','13','B',1776000,'available'),
+  u('A-13-3A','A','13','C',1500000,'available'),
+  u('A-12-3A','A','12','C',1499000,'available'),
+  u('A-11-02','A','11','B',1776000,'available'),
+  u('A-11-05','A','11','B',1769000,'available'),
+  u('A-11-06','A','11','B',1748000,'available'),
+  u('A-11-01','A','11','C',1503000,'available'),
+  u('A-11-3A','A','11','C',1498000,'available'),
+  u('A-10-06','A','10','B',1772000,'available'),
+  u('A-09-01','A','9','C',1501000,'available'),
+  u('A-09-3A','A','9','C',1496000,'available'),
+  u('A-08-01','A','8','C',1500000,'available'),
+  u('A-08-3A','A','8','C',1495000,'available'),
+  u('A-07-02','A','7','B',1775000,'available'),
+  u('A-07-03','A','7','B',1773000,'available'),
+  u('A-07-01','A','7','C',1493000,'available'),
+  u('A-06-01','A','6','C',1493000,'available'),
+  u('A-06-3A','A','6','C',1492000,'available'),
+  u('A-05-02','A','5','B',1773000,'available'),
+  u('A-05-03','A','5','B',1708000,'available'),
+  u('A-05-01','A','5','C',1497000,'available'),
+  u('A-05-3A','A','5','C',1492000,'available'),
+  u('A-2U-01','A','2U','2U',1404000,'available'),
+  u('A-2U-02','A','2U','2U',2798000,'available'),
+  u('A-2U-06','A','2U','2U',1689000,'available'),
+  u('A-02-01','A','2','2-2',1607000,'available'),
+  u('A-02-02','A','2','2-3',1752000,'available'),
+  u('A-02-03','A','2','2-4',1717000,'available'),
+
+  // ---------------- BLOCK B ----------------
+  u('B-PH-01','B','38','Penthouse',3305000,'available'),
+  u('B-37-01','B','37','C',1448000,'available'),
+  u('B-37-3A','B','37','C',1458000,'available'),
+  u('B-37-02','B','37','B',1711000,'available'),
+  u('B-37-03','B','37','B',1721000,'available'),
+  u('B-37-05','B','37','B',1721000,'available'),
+  u('B-37-06','B','37','B',1711000,'available'),
+  u('B-36-01','B','36','C',1447000,'available'),
+  u('B-36-3A','B','36','C',1457000,'available'),
+  u('B-36-02','B','36','B',1710000,'available'),
+  u('B-36-03','B','36','B',1720000,'strategic'),
+  u('B-36-05','B','36','B',1719000,'sold'),
+  u('B-36-06','B','36','B',1719000,'available'),
+  u('B-35-01','B','35','C',1446000,'available'),
+  u('B-35-3A','B','35','C',1456000,'available'),
+  u('B-35-02','B','35','B',1709000,'available'),
+  u('B-35-03','B','35','B',1719000,'available'),
+  u('B-35-05','B','35','B',1719000,'available'),
+  u('B-35-06','B','35','B',1709000,'available'),
+  u('B-33A-01','B','33A','C',1445000,'available'),
+  u('B-33A-3A','B','33A','C',1455000,'available'),
+  u('B-33A-02','B','33A','B',1703000,'available'),
+  u('B-33A-03','B','33A','B',1718000,'available'),
+  u('B-33A-05','B','33A','B',1718000,'available'),
+  u('B-33A-06','B','33A','B',1708000,'available'),
+  u('B-32-01','B','32','C',1443000,'available'),
+  u('B-32-02','B','32','B',1706000,'available'),
+  u('B-32-03','B','32','B',1716000,'strategic'),
+  u('B-32-05','B','32','B',1717000,'sold'),
+  u('B-32-06','B','32','B',1716000,'available'),
+  u('B-31-01','B','31','C',1442000,'available'),
+  u('B-31-3A','B','31','C',1452000,'available'),
+  u('B-31-02','B','31','B',1703000,'available'),
+  u('B-31-03','B','31','B',1715000,'available'),
+  u('B-31-05','B','31','B',1715000,'available'),
+  u('B-31-06','B','31','B',1701000,'available'),
+  u('B-30-01','B','30','C',1441000,'available'),
+  u('B-30-02','B','30','B',1704000,'available'),
+  u('B-30-03','B','30','B',1714000,'available'),
+  u('B-30-05','B','30','B',1714000,'available'),
+  u('B-30-06','B','30','B',1704000,'available'),
+  u('B-29-01','B','29','C',1440000,'available'),
+  u('B-29-02','B','29','B',1703000,'available'),
+  u('B-29-03','B','29','B',1713000,'available'),
+  u('B-29-05','B','29','B',1713000,'available'),
+  u('B-29-06','B','29','B',1703000,'available'),
+  u('B-28-01','B','28','C',1439000,'available'),
+  u('B-28-02','B','28','B',1702000,'available'),
+  u('B-28-03','B','28','B',1712000,'available'),
+  u('B-28-05','B','28','B',1712000,'available'),
+  u('B-28-06','B','28','B',1702000,'available'),
+  u('B-27-01','B','27','C',1438000,'available'),
+  u('B-27-02','B','27','B',1701000,'available'),
+  u('B-27-03','B','27','B',1711000,'available'),
+  u('B-27-05','B','27','B',1711000,'available'),
+  u('B-27-06','B','27','B',1701000,'available'),
+  u('B-26-01','B','26','C',1436000,'available'),
+  u('B-26-02','B','26','B',1699000,'available'),
+  u('B-26-03','B','26','B',1709000,'available'),
+  u('B-26-05','B','26','B',1699000,'available'),
+  u('B-26-06','B','26','B',1699000,'available'),
+  u('B-25-01','B','25','C',1436000,'available'),
+  u('B-25-02','B','25','B',1699000,'available'),
+  u('B-25-03','B','25','B',1699000,'available'),
+  u('B-25-05','B','25','B',1699000,'available'),
+  u('B-25-06','B','25','B',1699000,'available'),
+  u('B-23A-01','B','23A','C',1435000,'available'),
+  u('B-23A-02','B','23A','B',1698000,'available'),
+  u('B-23A-03','B','23A','B',1708000,'available'),
+  u('B-23A-05','B','23A','B',1708000,'available'),
+  u('B-23A-06','B','23A','B',1698000,'available'),
+  u('B-16-02','B','16','C',1498000,'available'),
+  u('B-16-03','B','16','B',1730000,'available'),
+  u('B-13-01','B','13','C',1414000,'available'),
+  u('B-13-02','B','13','B',1687000,'available'),
+  u('B-13-03','B','13','B',1697000,'available'),
+  u('B-13-05','B','13','B',1697000,'available'),
+  u('B-13-06','B','13','B',1687000,'available'),
+  u('B-12-01','B','12','C',1423000,'available'),
+  u('B-12-02','B','12','B',1686000,'available'),
+  u('B-12-03','B','12','B',1696000,'available'),
+  u('B-12-05','B','12','B',1696000,'available'),
+  u('B-12-06','B','12','B',1686000,'available'),
+  u('B-11-01','B','11','C',1422000,'available'),
+  u('B-11-02','B','11','B',1685000,'available'),
+  u('B-11-03','B','11','B',1695000,'available'),
+  u('B-11-05','B','11','B',1695000,'available'),
+  u('B-11-06','B','11','B',1685000,'available'),
+  u('B-10-01','B','10','C',1421000,'available'),
+  u('B-10-02','B','10','B',1684000,'available'),
+  u('B-10-03','B','10','B',1694000,'available'),
+  u('B-09-01','B','9','C',1420000,'available'),
+  u('B-09-3A','B','9','C',1430000,'available'),
+  u('B-08-01','B','8','C',1419000,'available'),
+  u('B-08-3A','B','8','C',1429000,'available'),
+  u('B-07-01','B','7','C',1418000,'available'),
+  u('B-07-3A','B','7','C',1428000,'available'),
+  u('B-06-01','B','6','C',1417000,'available'),
+  u('B-06-3A','B','6','C',1427000,'available'),
+  u('B-05-01','B','5','C',1416000,'available'),
+  u('B-05-3A','B','5','C',1426000,'available'),
+  u('B-3A-01','B','3A','C',1415000,'available'),
+  u('B-3A-3A','B','3A','C',1425000,'available'),
+
+  // ---------------- BLOCK C ----------------
+  u('C-PH-01','C','38','Penthouse',10247000,'available'),
+  u('C-PH-02','C','38','Penthouse',10340000,'available'),
+  u('C-37-03','C','37','A2',2234000,'available'),
+  u('C-37-3A','C','37','C',1993000,'available'),
+  u('C-36-03','C','36','A2',2203000,'available'),
+  u('C-35-05','C','35','A2',2202000,'strategic'),
+  u('C-35-01','C','35','C',1997000,'strategic'),
+  u('C-35-3A','C','35','C',1992000,'available'),
+  u('C-33A-03','C','33A','A2',2261000,'available'),
+  u('C-33A-05','C','33A','A2',2201000,'strategic'),
+  u('C-33A-01','C','33A','C',1997000,'available'),
+  u('C-33A-3A','C','33A','C',1992000,'available'),
+  u('C-33-03','C','33','A2',2200000,'available'),
+  u('C-33-05','C','33','C',2200000,'available'),
+  u('C-33-3A','C','33','C',1991000,'available'),
+  u('C-32-03','C','32','A2',2199000,'available'),
+  u('C-32-05','C','32','C',2155000,'available'),
+  u('C-31-03','C','31','A2',2198000,'available'),
+  u('C-31-05','C','31','C',2198000,'available'),
+  u('C-30-05','C','30','A2',2147000,'available'),
+  u('C-30-01','C','30','C',2144000,'strategic'),
+  u('C-30-3A','C','30','C',1588000,'strategic'),
+  u('C-29-03','C','29','A2',2196000,'available'),
+  u('C-29-05','C','29','C',2195000,'strategic'),
+  u('C-29-01','C','29','C',1587000,'strategic'),
+  u('C-28-03','C','28','A2',2195000,'available'),
+  u('C-28-05','C','28','C',2195000,'available'),
+  u('C-28-3A','C','28','A1',1555000,'available'),
+  u('C-27-03','C','27','A2',2194000,'available'),
+  u('C-27-05','C','27','C',2194000,'available'),
+  u('C-27-3A','C','27','A1',1585000,'available'),
+  u('C-26-03','C','26','A2',2193000,'available'),
+  u('C-26-05','C','26','C',2192000,'available'),
+  u('C-25-03','C','25','A2',2197000,'available'),
+  u('C-25-05','C','25','C',1592000,'strategic'),
+  u('C-25-06','C','25','A1',2192000,'strategic'),
+  u('C-23A-03','C','23A','A2',2191000,'available'),
+  u('C-23A-05','C','23A','C',2141000,'available'),
+  u('C-23A-02','C','23A','A1',2196000,'strategic'),
+  u('C-23A-06','C','23A','A1',2196000,'available'),
+  u('C-23-03','C','23','A2',2193000,'available'),
+  u('C-22-03','C','22','A2',2199000,'available'),
+  u('C-22-05','C','22','C',2151000,'available'),
+  u('C-22-3A','C','22','A1',1580000,'available'),
+  u('C-22-02','C','22','A1',2199000,'strategic'),
+  u('C-22-06','C','22','A1',2199000,'strategic'),
+  u('C-21-05','C','21','A2',2189000,'available'),
+  u('C-21-3A','C','21','C',1579000,'available'),
+  u('C-21-06','C','21','A1',2191000,'strategic'),
+  u('C-20-06','C','20','A1',2191000,'strategic'),
+  u('C-19-03','C','19','A2',2185000,'available'),
+  u('C-19-3A','C','19','C',1577000,'available'),
+  u('C-19-02','C','19','A1',2193000,'strategic'),
+  u('C-19-06','C','19','A1',2161000,'available'),
+  u('C-18-03','C','18','A2',2185000,'available'),
+  u('C-18-05','C','18','C',2159000,'available'),
+  u('C-18-01','C','18','A1',1587000,'available'),
+  u('C-18-3A','C','18','A1',1576000,'available'),
+  u('C-18-02','C','18','A1',2189000,'strategic'),
+  u('C-18-06','C','18','A1',2144000,'available'),
+  u('C-17-03','C','17','A2',2184000,'available'),
+  u('C-17-05','C','17','C',2154000,'available'),
+  u('C-17-3A','C','17','A1',1579000,'available'),
+  u('C-17-06','C','17','A1',2189000,'available'),
+  u('C-16-05','C','16','A2',2183000,'available'),
+  u('C-16-02','C','16','A1',2188000,'available'),
+  u('C-15-3A','C','15','A1',1573000,'available'),
+  u('C-13A-03','C','13A','A2',2181000,'available'),
+  u('C-13A-01','C','13A','C',1577000,'available'),
+  u('C-13-3A','C','13','C',1571000,'available'),
+  u('C-12-06','C','12','A1',2184000,'strategic'),
+  u('C-11-3A','C','11','C',1569000,'available'),
+  u('C-09-03','C','9','A2',2176000,'available'),
+  u('C-09-3A','C','9','C',1568000,'available'),
+  u('C-09-01','C','9','A1',2176000,'available'),
+  u('C-08-3A','C','8','C',1566000,'available'),
+  u('C-07-01','C','7','C',1570000,'available'),
+  u('C-07-3A','C','7','A1',1567000,'available'),
+  u('C-06-01','C','6','C',1569000,'available'),
+  u('C-06-3A','C','6','A1',1564000,'available'),
+  u('C-05-03','C','5','A2',2172000,'available'),
+  u('C-05-01','C','5','C',1568000,'available'),
+  u('C-05-3A','C','5','A1',1563000,'available'),
+  u('C-3A-03','C','3A','A2',2171000,'available'),
+  u('C-3A-01','C','3A','C',1567000,'available'),
+  u('C-2U-01','C','2U','2U-1',1578000,'available'),
+  u('C-02-01','C','2','2-2C',1577000,'available'),
+
+  // ---------------- BLOCK D ----------------
+  u('D-PH-01','D','38','Penthouse',9335000,'available'),
+  u('D-PH-02','D','38','Penthouse',9305000,'available'),
+  u('D-37-02','D','37','A2',7002000,'available'),
+  u('D-30-02','D','30','A2',1994000,'sold'),
+  u('D-30-06','D','30','A2',1994000,'sold'),
+  u('D-30-03','D','30','A1',1994000,'sold'),
+  u('D-28-05','D','28','A1',1994000,'sold'),
+  u('D-25-02','D','25','A2',1993000,'sold'),
+  u('D-25-06','D','25','A2',1993000,'sold'),
+  u('D-25-03','D','25','A1',2000000,'available'),
+  u('D-25-05','D','25','C',2000000,'available'),
+  u('D-23A-02','D','23A','A2',1992000,'sold'),
+  u('D-23A-06','D','23A','A2',1989000,'sold'),
+  u('D-23A-03','D','23A','A1',1989000,'sold'),
+  u('D-23A-05','D','23A','C',1939000,'sold'),
+  u('D-23-02','D','23','A2',1992000,'sold'),
+  u('D-23-06','D','23','A2',1992000,'sold'),
+  u('D-23-03','D','23','A1',1992000,'sold'),
+  u('D-23-05','D','23','C',1992000,'sold'),
+  u('D-22-02','D','22','A2',1991000,'sold'),
+  u('D-22-06','D','22','A2',1991000,'sold'),
+  u('D-22-03','D','22','A1',1991000,'sold'),
+  u('D-22-05','D','22','C',1991000,'sold'),
+  u('D-21-02','D','21','A2',1986000,'available'),
+  u('D-21-05','D','21','A2',1986000,'available'),
+  u('D-21-03','D','21','A1',1996000,'available'),
+  u('D-21-05b','D','21','C',1996000,'available'),
+  u('D-20-02','D','20','A2',1985000,'available'),
+  u('D-20-06','D','20','A2',1985000,'available'),
+  u('D-19-06','D','19','A2',1984000,'available'),
+  u('D-18-02','D','18','A2',1983000,'available'),
+  u('D-18-06','D','18','A2',1983000,'available'),
+  u('D-18-03','D','18','A1',1993000,'available'),
+  u('D-18-05','D','18','C',1993000,'available'),
+  u('D-08-02','D','8','A2',1973000,'available'),
+  u('D-08-06','D','8','A2',1973000,'available'),
+  u('D-08-03','D','8','A1',1983000,'available'),
+  u('D-08-05','D','8','C',1983000,'available'),
+
+  // ---------------- BLOCK E ----------------
+  u('E-38-01','E','38','C',1591000,'strategic'),
+  u('E-38-08','E','38','C',1604000,'strategic'),
+  u('E-38-02','E','38','D3',1155000,'available'),
+  u('E-38-07','E','38','D3',1154000,'available'),
+  u('E-38-03','E','38','D2',1148000,'available'),
+  u('E-38-06','E','38','D2',1151000,'available'),
+  u('E-38-05','E','38','D1',1394000,'available'),
+  u('E-38-3A','E','38','D1',1189000,'available'),
+  u('E-37-01','E','37','C',1593000,'available'),
+  u('E-37-08','E','37','C',1603000,'available'),
+  u('E-37-02','E','37','D3',1150000,'available'),
+  u('E-37-07','E','37','D3',1153000,'available'),
+  u('E-37-06','E','37','D2',1150000,'available'),
+  u('E-37-05','E','37','D1',1393000,'available'),
+  u('E-37-3A','E','37','D1',1188000,'available'),
+  u('E-36-01','E','36','C',1591000,'available'),
+  u('E-36-02','E','36','D3',1167000,'available'),
+  u('E-36-03','E','36','D2',1144000,'available'),
+  u('E-35-3A','E','36','D1',1190000,'available'),
+  u('E-35-01','E','35','C',1591000,'available'),
+  u('E-35-08','E','35','C',1601000,'available'),
+  u('E-35-02','E','35','D3',1156000,'available'),
+  u('E-35-03','E','35','D2',1145000,'available'),
+  u('E-35-06','E','35','D2',1148000,'available'),
+  u('E-33A-01','E','33A','C',1587000,'available'),
+  u('E-33A-08','E','33A','C',1591000,'strategic'),
+  u('E-33A-02','E','33A','D3',1155000,'available'),
+  u('E-33A-07','E','33A','D3',1150000,'available'),
+  u('E-33A-03','E','33A','D2',1142000,'available'),
+  u('E-33A-06','E','33A','D2',1140000,'strategic'),
+  u('E-33A-05','E','33A','D1',1192000,'available'),
+  u('E-33-01','E','33','C',1586000,'available'),
+  u('E-33-08','E','33','C',1590000,'strategic'),
+  u('E-33-02','E','33','D2',1141000,'available'),
+  u('E-33-05','E','33','D1',1184000,'available'),
+  u('E-32-01','E','32','C',1585000,'available'),
+  u('E-32-08','E','32','C',1590000,'available'),
+  u('E-32-02','E','32','D3',1153000,'available'),
+  u('E-32-07','E','32','D2',1140000,'strategic'),
+  u('E-32-03','E','32','D2',1140000,'available'),
+  u('E-32-06','E','32','D2',1140000,'available'),
+  u('E-31-01','E','31','C',1584000,'available'),
+  u('E-31-08','E','31','C',1147000,'strategic'),
+  u('E-31-07','E','31','D3',1147000,'available'),
+  u('E-31-03','E','31','D2',1139000,'available'),
+  u('E-31-05','E','31','D1',1187000,'available'),
+  u('E-30-01','E','30','C',1583000,'available'),
+  u('E-30-07','E','30','D3',1146000,'available'),
+  u('E-30-03','E','30','D2',1138000,'available'),
+  u('E-30-06','E','30','D2',1143000,'available'),
+  u('E-29-01','E','29','C',1582000,'available'),
+  u('E-29-08','E','29','C',1595000,'available'),
+  u('E-29-02','E','29','D3',1150000,'available'),
+  u('E-29-07','E','29','D3',1147000,'strategic'),
+  u('E-29-03','E','29','D2',1137000,'available'),
+  u('E-29-06','E','29','D2',1145000,'strategic'),
+  u('E-29-05','E','29','D1',1180000,'available'),
+  u('E-28-01','E','28','C',1581000,'available'),
+  u('E-28-08','E','28','C',1594000,'available'),
+  u('E-28-02','E','28','D3',1149000,'available'),
+  u('E-28-03','E','28','D2',1136000,'available'),
+  u('E-28-06','E','28','D2',1141000,'available'),
+  u('E-27-01','E','27','C',1580000,'available'),
+  u('E-27-08','E','27','C',1593000,'available'),
+  u('E-27-02','E','27','D3',1148000,'available'),
+  u('E-27-07','E','27','D3',1143000,'available'),
+  u('E-27-06','E','27','D2',1140000,'available'),
+  u('E-26-01','E','26','C',1578000,'available'),
+  u('E-26-07','E','26','D3',1141000,'available'),
+  u('E-26-06','E','26','D2',1181000,'available'),
+  u('E-25-08','E','25','C',1511000,'available'),
+  u('E-25-03','E','25','D2',1122000,'available'),
+  u('E-25-06','E','25','D2',1130000,'available'),
+  u('E-23A-08','E','23A','C',1590000,'available'),
+  u('E-23A-02','E','23A','D3',1145000,'available'),
+  u('E-23A-07','E','23A','D3',1140000,'available'),
+  u('E-23A-03','E','23A','D2',1132000,'available'),
+  u('E-23A-06','E','23A','D2',1137000,'available'),
+  u('E-23-01','E','23','C',1576000,'available'),
+  u('E-23-07','E','23','D3',1129000,'available'),
+  u('E-22-01','E','22','C',1575000,'available'),
+  u('E-22-08','E','22','C',1589000,'available'),
+  u('E-22-02','E','22','D3',1130000,'available'),
+  u('E-22-03','E','22','D2',1130000,'available'),
+  u('E-21-03','E','21','D2',1129000,'available'),
+  u('E-21-06','E','21','D2',1134000,'available'),
+  u('E-20-01','E','20','C',1573000,'available'),
+  u('E-20-02','E','20','D3',1141000,'available'),
+  u('E-19-08','E','19','C',1585000,'available'),
+  u('E-19-02','E','19','D3',1140000,'available'),
+  u('E-19-03','E','19','D2',1127000,'available'),
+  u('E-19-06','E','19','D2',1132000,'available'),
+  u('E-18-01','E','18','C',1580000,'strategic'),
+  u('E-18-02','E','18','D3',1148000,'strategic'),
+  u('E-18-03','E','18','D2',1129000,'strategic'),
+  u('E-18-06','E','18','D2',1180000,'strategic'),
+  u('E-18-05','E','18','D1',1173000,'strategic'),
+  u('E-18-3A','E','18','D1',1180000,'strategic'),
+  u('E-17-01','E','17','C',1570000,'available'),
+  u('E-17-02','E','17','D3',1128000,'available'),
+  u('E-17-03','E','17','D2',1129000,'available'),
+  u('E-17-06','E','17','D2',1135000,'available'),
+  u('E-16-01','E','16','C',1569000,'available'),
+  u('E-16-08','E','16','C',1502000,'available'),
+  u('E-16-07','E','16','D3',1139000,'available'),
+  u('E-16-03','E','16','D2',1124000,'available'),
+  u('E-16-06','E','16','D2',1129000,'available'),
+  u('E-15-01','E','15','C',1568000,'available'),
+  u('E-15-03','E','15','D2',1123000,'available'),
+  u('E-15-06','E','15','D2',1128000,'available'),
+  u('E-13A-08','E','13A','C',1580000,'available'),
+  u('E-13A-02','E','13A','D3',1135000,'available'),
+  u('E-13A-07','E','13A','D3',1130000,'available'),
+  u('E-13A-03','E','13A','D2',1122000,'available'),
+  u('E-13A-06','E','13A','D2',1127000,'available'),
+  u('E-13-02','E','13','D3',1124000,'available'),
+  u('E-13-07','E','13','D3',1120000,'available'),
+  u('E-13-03','E','13','D2',1121000,'available'),
+  u('E-13-06','E','13','D2',1120000,'available'),
+  u('E-12-01','E','12','C',1503000,'available'),
+  u('E-12-02','E','12','D3',1133000,'available'),
+  u('E-12-07','E','12','D3',1128000,'available'),
+  u('E-12-06','E','12','D2',1123000,'available'),
+  u('E-11-08','E','11','C',1577000,'available'),
+  u('E-11-07','E','11','D3',1127000,'available'),
+  u('E-11-03','E','11','D2',1119000,'available'),
+  u('E-11-06','E','11','D2',1124000,'available'),
+  u('E-10-08','E','10','C',1576000,'available'),
+  u('E-10-02','E','10','D3',1131000,'available'),
+  u('E-10-03','E','10','D2',1118000,'available'),
+  u('E-09-08','E','9','C',1549000,'available'),
+  u('E-09-06','E','9','D2',1122000,'available'),
+  u('E-08-08','E','8','C',1674000,'available'),
+  u('E-08-02','E','8','D3',1129000,'available'),
+  u('E-08-03','E','8','D2',1116000,'available'),
+  u('E-07-08','E','7','C',1573000,'available'),
+  u('E-07-03','E','7','D2',1115000,'available'),
+  u('E-07-06','E','7','D2',1120000,'available'),
+  u('E-06-08','E','6','C',1672000,'available'),
+  u('E-06-02','E','6','D3',1127000,'available'),
+  u('E-06-07','E','6','D3',1122000,'available'),
+  u('E-06-03','E','6','D2',1114000,'available'),
+  u('E-06-06','E','6','D2',1119000,'available'),
+  u('E-05-07','E','5','D3',1121000,'available'),
+  u('E-05-03','E','5','D2',1118000,'available'),
+  u('E-05-06','E','5','D2',1123000,'available'),
+  u('E-3A-05','E','3A','D2',1117000,'available'),
+];
+
+const BLOCKS = ['A','B','C','D','E'];
+const BLOCK_META = {
+  A:{tagline:'City-facing residences with panoramic corridor views'},
+  B:{tagline:'Signature tower units overlooking the Embassy District'},
+  C:{tagline:'Premium duplex penthouses and A2 layouts'},
+  D:{tagline:'Elevated privacy with exclusive penthouse suites'},
+  E:{tagline:'Compact luxury layouts, ideal for investors'},
+};
+
+/* ================= APP STATE ================= */
+let activeBlock = null;
+let activeType = 'All';
+let favorites = new Set();
+let compareSet = new Set();
+let searchDebounce = null;
+
+function fmtRM(n){ return 'RM' + n.toLocaleString('en-MY'); }
+function floorSort(a,b){
+  const pa = parseFloat(a) || 0, pb = parseFloat(b) || 0;
+  return pb - pa;
+}
+function floorLevelBucket(floor){
+  const n = parseFloat(floor) || 0;
+  if(n <= 12) return 'low';
+  if(n <= 25) return 'mid';
+  return 'high';
+}
+const STATUS_LABEL = {available:'Available', strategic:'Available Strategic', sold:'Sold', disabled:'Unavailable'};
+const STATUS_CLASS = {available:'status-available', strategic:'status-strategic', sold:'status-sold', disabled:'status-disabled'};
+
+/* ---------- Block Grid ---------- */
+function renderBlockGrid(){
+  const grid = document.getElementById('blockGrid');
+  grid.innerHTML = BLOCKS.map(b=>{
+    const units = INVENTORY.filter(x=>x.block===b);
+    const avail = units.filter(x=>x.status==='available' || x.status==='strategic').length;
+    const topFloor = units.reduce((m,x)=> Math.max(m, parseFloat(x.floor)||0), 0);
+    return `
+    <div onclick="openBlock('${b}')" class="glass-card rounded-2xl p-6 text-center cursor-pointer relative overflow-hidden">
+      <div class="absolute top-3 left-3 text-[10px] tracking-widest uppercase" style="color:var(--champagne);">Lvl 1–${topFloor}</div>
+      <p class="font-display text-5xl mb-2 mt-3" style="color:var(--gold-deep);">${b}</p>
+      <div class="gold-line w-8 mx-auto mb-3"></div>
+      <p class="font-serif-soft text-lg">${avail} units available</p>
+      <p class="text-[11px] mt-2 leading-snug" style="color:var(--ink-soft);">${BLOCK_META[b].tagline}</p>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- Open / Close block inventory ---------- */
+function openBlock(block){
+  activeBlock = block;
+  activeType = 'All';
+  document.getElementById('activeBlockName').textContent = block;
+  document.getElementById('blocks').classList.add('hidden');
+  const view = document.getElementById('inventoryView');
+  view.classList.remove('hidden');
+  view.classList.add('fade-section');
+  requestAnimationFrame(()=>view.classList.add('in-view'));
+  renderTypeTabs();
+  renderFloorInventory();
+  renderFavorites();
+  renderCompareSlots();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function closeInventory(){
+  document.getElementById('inventoryView').classList.add('hidden');
+  document.getElementById('blocks').classList.remove('hidden');
+  window.scrollTo({top:document.getElementById('blocks').offsetTop-80, behavior:'smooth'});
+}
+
+/* ---------- Unit type tabs ---------- */
+function renderTypeTabs(){
+  const types = ['All', ...new Set(INVENTORY.filter(x=>x.block===activeBlock).map(x=>x.type))];
+  const wrap = document.getElementById('typeTabs');
+  wrap.innerHTML = types.map(t=>`
+    <button onclick="setType('${t}')" class="tab-btn px-4 py-2 text-sm ${t===activeType?'active':''}" data-type="${t}">
+      Type ${t}
+    </button>`).join('');
+}
+function setType(t){
+  activeType = t;
+  renderTypeTabs();
+  renderFloorInventory();
+}
+
+/* ---------- Floor inventory rendering with filters ---------- */
+function getFilteredUnits(){
+  let units = INVENTORY.filter(x=>x.block===activeBlock);
+  if(activeType !== 'All') units = units.filter(x=>x.type===activeType);
+
+  const search = (document.getElementById('searchUnit')?.value||'').trim().toUpperCase();
+  if(search) units = units.filter(x=>x.unitNo.toUpperCase().includes(search));
+
+  const floorLevel = document.getElementById('filterFloorLevel')?.value || 'all';
+  if(floorLevel!=='all') units = units.filter(x=>floorLevelBucket(x.floor)===floorLevel);
+
+  const priceRange = document.getElementById('filterPrice')?.value || 'all';
+  if(priceRange!=='all'){
+    const [min,max] = priceRange.split('-').map(Number);
+    units = units.filter(x=>x.price>=min && x.price<=max);
+  }
+
+  const status = document.getElementById('filterStatus')?.value || 'all';
+  if(status!=='all') units = units.filter(x=>x.status===status);
+
+  return units;
+}
+
+function renderFloorInventory(){
+  const units = getFilteredUnits();
+  const floors = [...new Set(units.map(x=>x.floor))].sort(floorSort);
+  const container = document.getElementById('floorInventory');
+
+  if(floors.length===0){
+    container.innerHTML = `<div class="p-10 text-center text-sm" style="color:var(--ink-soft);">No units match your filters.</div>`;
+    return;
+  }
+
+  container.innerHTML = floors.map(f=>{
+    const floorUnits = units.filter(x=>x.floor===f).sort((a,b)=>a.unitNo.localeCompare(b.unitNo));
+    return `
+    <div class="floor-row flex items-center gap-4 px-5 py-4 border-b" style="border-color:var(--line);">
+      <div class="w-16 flex-shrink-0 text-right">
+        <p class="font-display text-lg" style="color:var(--gold-deep);">${f}</p>
+        <p class="text-[10px] uppercase tracking-wide" style="color:var(--ink-soft);">Floor</p>
+      </div>
+      <div class="flex flex-wrap gap-2 flex-1">
+        ${floorUnits.map(unitTile).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function unitTile(x){
+  const clickable = x.status!=='sold' && x.status!=='disabled';
+  const isFav = favorites.has(x.unitNo);
+  const inCompare = compareSet.has(x.unitNo);
+  return `
+  <div class="unit-tile ${STATUS_CLASS[x.status]} rounded-lg px-3 py-2 text-xs relative min-w-[100px] group">
+    <div onclick="${clickable?`openUnitModal('${x.unitNo}')`:''}" class="cursor-pointer">
+      <p class="font-medium">${x.unitNo}</p>
+      <p class="text-[10px] opacity-80">${fmtRM(x.price)}</p>
+    </div>
+    ${clickable?`
+    <button onclick="event.stopPropagation(); toggleFavorite('${x.unitNo}')" title="Save to favorites" class="heart-btn ${isFav?'active':''} absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-white flex items-center justify-center shadow">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="${isFav?'#C4838A':'none'}" stroke="#C4838A" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+    </button>
+    <button onclick="event.stopPropagation(); toggleCompare('${x.unitNo}')" title="Add to compare" class="absolute -bottom-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center shadow text-[9px] font-bold ${inCompare?'text-white':''}" style="background:${inCompare?'var(--gold)':'#fff'}; color:${inCompare?'#fff':'var(--gold-deep)'};">⇄</button>
+    `:''}
+  </div>`;
+}
+
+/* wire up filters */
+['filterFloorLevel','filterPrice','filterStatus'].forEach(id=>{
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.getElementById(id).addEventListener('change', renderFloorInventory);
+  });
+});
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('searchUnit').addEventListener('input', ()=>{
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(renderFloorInventory, 150);
+  });
+});
+
+/* ---------- Unit modal ---------- */
+let currentModalUnit = null;
+function openUnitModal(unitNo){
+  const x = INVENTORY.find(u=>u.unitNo===unitNo);
+  if(!x) return;
+  currentModalUnit = x;
+  document.getElementById('modalUnitNo').textContent = x.unitNo;
+  document.getElementById('modalTower').textContent = 'Block ' + x.block;
+  document.getElementById('modalFloor').textContent = 'Level ' + x.floor;
+  document.getElementById('modalSize').textContent = x.size + ' sqft';
+  document.getElementById('modalPrice').textContent = fmtRM(x.price);
+  document.getElementById('modalBed').textContent = x.bed;
+  document.getElementById('modalBath').textContent = x.bath;
+  document.getElementById('modalFacing').textContent = x.facing;
+  document.getElementById('modalStatus').textContent = STATUS_LABEL[x.status];
+  document.getElementById('modalRequestPrice').onclick = ()=>window.open(`https://wa.me/60000000000?text=I%20would%20like%20full%20pricing%20for%20unit%20${encodeURIComponent(x.unitNo)}`,'_blank');
+  document.getElementById('modalSchedule').onclick = ()=>window.open(`https://wa.me/60000000000?text=I%20would%20like%20to%20schedule%20a%20viewing%20for%20unit%20${encodeURIComponent(x.unitNo)}`,'_blank');
+  updateModalFavBtn();
+  document.getElementById('unitModal').classList.remove('hidden');
+}
+function closeModal(){ document.getElementById('unitModal').classList.add('hidden'); }
+function updateModalFavBtn(){
+  const btn = document.getElementById('modalFavBtn');
+  if(!currentModalUnit) return;
+  btn.classList.toggle('active', favorites.has(currentModalUnit.unitNo));
+}
+function toggleFavoriteFromModal(){
+  if(!currentModalUnit) return;
+  toggleFavorite(currentModalUnit.unitNo);
+  updateModalFavBtn();
+}
+
+/* ---------- Favorites ---------- */
+function toggleFavorite(unitNo){
+  if(favorites.has(unitNo)) favorites.delete(unitNo); else favorites.add(unitNo);
+  renderFavorites();
+  renderFloorInventory();
+}
+function renderFavorites(){
+  document.getElementById('favCountNav').textContent = `(${favorites.size})`;
+  document.getElementById('favCount').textContent = `${favorites.size} saved`;
+  const list = document.getElementById('favoritesList');
+  if(favorites.size===0){
+    list.innerHTML = `<p class="text-xs" style="color:var(--ink-soft);">No units saved yet. Tap the heart on a unit to save it.</p>`;
+    return;
+  }
+  list.innerHTML = [...favorites].map(no=>{
+    const x = INVENTORY.find(u=>u.unitNo===no);
+    if(!x) return '';
+    return `<div class="flex items-center justify-between glass-card rounded-lg px-3 py-2">
+      <button onclick="openUnitModal('${no}')" class="text-left">
+        <p class="font-medium text-xs">${no}</p>
+        <p class="text-[10px]" style="color:var(--ink-soft);">${fmtRM(x.price)}</p>
+      </button>
+      <button onclick="toggleFavorite('${no}')" class="text-xs opacity-50 hover:opacity-100">✕</button>
+    </div>`;
+  }).join('');
+}
+function openFavoritesPanel(){
+  if(activeBlock===null && favorites.size>0){
+    openBlock(INVENTORY.find(u=>u.unitNo===[...favorites][0]).block);
+  } else if(activeBlock===null){
+    document.getElementById('blocks').scrollIntoView({behavior:'smooth'});
+  }
+}
+
+/* ---------- Compare ---------- */
+function toggleCompare(unitNo){
+  if(compareSet.has(unitNo)) compareSet.delete(unitNo);
+  else if(compareSet.size<3) compareSet.add(unitNo);
+  renderCompareSlots();
+  renderFloorInventory();
+}
+function renderCompareSlots(){
+  const wrap = document.getElementById('compareSlots');
+  const arr = [...compareSet];
+  wrap.innerHTML = [0,1,2].map(i=>{
+    const no = arr[i];
+    if(!no) return `<div class="compare-slot rounded-lg h-16 flex items-center justify-center text-[10px]" style="color:var(--ink-soft);">Empty</div>`;
+    return `<div class="glass-card rounded-lg h-16 flex flex-col items-center justify-center relative text-[10px] px-1">
+      <span class="font-medium">${no}</span>
+      <button onclick="toggleCompare('${no}')" class="absolute top-0.5 right-1 opacity-50 hover:opacity-100">✕</button>
+    </div>`;
+  }).join('');
+}
+function openCompare(){
+  const arr = [...compareSet].map(no=>INVENTORY.find(u=>u.unitNo===no)).filter(Boolean);
+  if(arr.length<2){ alert('Select at least 2 units to compare.'); return; }
+  const rows = [
+    ['Unit', x=>x.unitNo],
+    ['Block', x=>x.block],
+    ['Floor', x=>x.floor],
+    ['Size (sqft)', x=>x.size],
+    ['Price', x=>fmtRM(x.price)],
+    ['Price / sqft', x=>'RM'+Math.round(x.price/x.size).toLocaleString('en-MY')],
+    ['Bedrooms', x=>x.bed],
+    ['Bathrooms', x=>x.bath],
+    ['Facing', x=>x.facing],
+    ['Status', x=>STATUS_LABEL[x.status]],
+  ];
+  document.getElementById('compareTableBody').innerHTML = rows.map(([label,fn])=>`
+    <tr class="border-b" style="border-color:var(--line);">
+      <td class="py-3 pr-4 text-xs uppercase tracking-wide font-medium" style="color:var(--ink-soft);">${label}</td>
+      ${arr.map(x=>`<td class="py-3 px-4 font-serif-soft text-base">${fn(x)}</td>`).join('')}
+    </tr>`).join('');
+  document.getElementById('compareModal').classList.remove('hidden');
+}
+function closeCompare(){ document.getElementById('compareModal').classList.add('hidden'); }
+
+/* ---------- Add heart-toggle + compare-toggle to unit tiles via long-press alt click ---------- */
+// Right-click / ctrl-click a unit to add to compare (documented via title attribute)
+
+/* ---------- Misc ---------- */
+function mockDownload(name){
+  alert(`"${name}" will download once the real PDF asset is linked. Replace the button's onclick with your file URL.`);
+}
+
+/* ---------- Nav scroll effect ---------- */
+window.addEventListener('scroll', ()=>{
+  const nav = document.getElementById('mainNav');
+  const logo = document.getElementById('navLogo');
+  const links = document.getElementById('navLinks');
+  if(window.scrollY>60){
+    nav.style.background = 'rgba(250,248,244,0.85)';
+    nav.style.backdropFilter = 'blur(14px)';
+    nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)';
+    logo.style.color = 'var(--charcoal)';
+    links.style.color = 'var(--charcoal)';
+  } else {
+    nav.style.background = 'transparent';
+    nav.style.boxShadow = 'none';
+    logo.style.color = '#fff';
+    links.style.color = '#fff';
+  }
+});
+
+/* ---------- Fade-in on scroll ---------- */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
+},{threshold:0.15});
+document.querySelectorAll('.fade-section').forEach(el=>observer.observe(el));
+
+/* ---------- Init ---------- */
+document.addEventListener('DOMContentLoaded', renderBlockGrid);
+</script>
+</body>
+</html>
